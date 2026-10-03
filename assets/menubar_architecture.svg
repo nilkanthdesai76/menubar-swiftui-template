@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c10"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f2430"/>
+      <stop offset="100%" stop-color="#161922"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="320" fill="url(#bg)" rx="14"/>
+
+  <!-- Top Menu Bar Simulation -->
+  <rect x="50" y="30" width="900" height="36" rx="6" fill="#1b2028" stroke="#30363d" stroke-width="1"/>
+  <circle cx="80" cy="48" r="5" fill="#ff5f56"/>
+  <circle cx="96" cy="48" r="5" fill="#ffbd2e"/>
+  <circle cx="112" cy="48" r="5" fill="#27c93f"/>
+
+  <!-- NSStatusItem Icon -->
+  <rect x="780" y="34" width="40" height="28" rx="4" fill="#38ef7d" fill-opacity="0.2" stroke="#38ef7d" stroke-width="1.5"/>
+  <text x="800" y="52" text-anchor="middle" font-size="12">🍏</text>
+  <text x="730" y="52" font-family="-apple-system, sans-serif" font-size="11" fill="#8b949e">NSStatusItem</text>
+
+  <!-- Dotted Connection Line -->
+  <line x1="800" y1="62" x2="800" y2="100" stroke="#38ef7d" stroke-width="2" stroke-dasharray="4"/>
+
+  <!-- Floating NSPanel -->
+  <rect x="640" y="100" width="310" height="190" rx="12" fill="url(#cardGrad)" stroke="#38ef7d" stroke-width="1.5" filter="drop-shadow(0 10px 20px rgba(0,0,0,0.5))"/>
+  <text x="795" y="130" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#f0f6fc">MenuBarPanel (NSPanel)</text>
+  <text x="795" y="150" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#8b949e">level: .floating | nonactivatingPanel</text>
+
+  <!-- SwiftUI NSHostingView Container -->
+  <rect x="660" y="165" width="270" height="105" rx="8" fill="#141820" stroke="#30363d" stroke-width="1"/>
+  <text x="795" y="195" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#00c6ff">SwiftUI ContentView</text>
+  <text x="795" y="220" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#8b949e">NSHostingView(rootView: ...)</text>
+  <text x="795" y="245" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#8b949e">Zero frame glitches · Smooth state</text>
+
+  <!-- Left Side Architecture Mechanics -->
+  <rect x="50" y="90" width="530" height="200" rx="10" fill="url(#cardGrad)" stroke="#30363d" stroke-width="1"/>
+  <text x="80" y="125" font-family="-apple-system, sans-serif" font-size="16" font-weight="700" fill="#f0f6fc">Non-Activating Menu Bar Architecture</text>
+  <text x="80" y="155" font-family="-apple-system, sans-serif" font-size="13" fill="#8b949e">1. <tspan fill="#f0f6fc">NSStatusItem</tspan> lives in system status bar, never steals app focus</text>
+  <text x="80" y="185" font-family="-apple-system, sans-serif" font-size="13" fill="#8b949e">2. <tspan fill="#f0f6fc">NSPanel</tspan> dynamically positioned under the status item frame</text>
+  <text x="80" y="215" font-family="-apple-system, sans-serif" font-size="13" fill="#8b949e">3. Global &amp; Local <tspan fill="#f0f6fc">NSEvent monitors</tspan> auto-dismiss on outside clicks</text>
+  <text x="80" y="245" font-family="-apple-system, sans-serif" font-size="13" fill="#8b949e">4. <tspan fill="#f0f6fc">.canJoinAllSpaces</tspan> stays sticky across all macOS virtual desktops</text>
+</svg>

@@ -1,43 +1,51 @@
-# MenuBar SwiftUI Template 🍏
+# menubar-swiftui-template 
 
-A production-ready starter architecture for building high-performance macOS menu bar extra utilities using **SwiftUI**, **AppKit** (`NSPanel`), and **Swift Concurrency**.
+A production-ready starter architecture for building high-performance macOS menu bar extra apps using **SwiftUI**, **NSPanel** floating popovers, and Swift Concurrency.
 
-[![Swift](https://img.shields.io/badge/Swift-5.9%20%7C%206.0-orange?style=flat-square&logo=swift)](https://swift.org)
+[![CI](https://github.com/nilkanthdesai76/menubar-swiftui-template/actions/workflows/ci.yml/badge.svg)](https://github.com/nilkanthdesai76/menubar-swiftui-template/actions)
+[![Swift](https://img.shields.io/badge/Swift-6.0-orange?style=flat-square&logo=swift)](https://swift.org)
 [![Platform](https://img.shields.io/badge/Platform-macOS%2013%2B-blue?style=flat-square&logo=apple)](https://developer.apple.com/macos)
+[![SPM](https://img.shields.io/badge/SPM-compatible-brightgreen?style=flat-square)](https://swift.org/package-manager/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)](LICENSE)
 
----
-
-## Why this template?
-
-While macOS 13+ introduced native SwiftUI `MenuBarExtra`, production utilities often hit roadblocks:
-- Standard popovers cannot float borderless or adjust window levels.
-- Menus close unpredictably or steal active application focus.
-- Advanced window animations, blurred materials, and custom click-outside dismissal are cumbersome with pure SwiftUI.
-
-This template bridges the best of both worlds:
-1. **SwiftUI** for the UI, state management, and modern animations.
-2. **AppKit (`NSPanel` + `NSStatusItem`)** for exact screen positioning, non-activating window levels, and outside click monitoring.
+<p align="center">
+  <img src="assets/menubar_architecture.svg" alt="macOS Menu Bar Architecture Diagram" width="100%"/>
+</p>
 
 ---
 
-## Architecture
+## Why this Architecture?
 
-- `MenuBarController`: Coordinates the `NSStatusBar` item, click actions, and screen-relative window anchoring.
-- `MenuBarPanel`: A borderless, non-activating `NSPanel` with `.floating` level and multi-space support.
-- `ContentView`: Pure SwiftUI component hosted inside `NSHostingView`.
-- Global Event Monitor: Automatically dismisses the popover when the user clicks elsewhere on screen.
+Standard SwiftUI `MenuBarExtra` is great for simple utility menus, but quickly falls short for rich interactive apps:
+- ❌ **Cannot anchor a custom `NSPanel`** with custom corner radius, blur material, or vibrancy.
+- ❌ **Steals key application focus** or drops active fullscreen game/editor sessions.
+- ❌ **Cannot position floating windows precisely** beneath the status icon.
+
+### Our Solution
+1. **`NSStatusItem`** manages the menu bar icon with zero UI flicker.
+2. **`MenuBarPanel` (`NSPanel`)** provides a `.nonactivatingPanel` overlay with `level = .floating`.
+3. **`NSHostingView`** renders any native SwiftUI `View` with full animation support.
+4. **Dual `NSEvent` Monitors** track global clicks outside the panel to gracefully dismiss it.
 
 ---
 
-## Quick Start
+## Project Structure
 
-```sh
-# Clone the template
+```
+Sources/MenuBarApp/
+├── main.swift                 # @MainActor application lifecycle entry point
+├── MenuBarController.swift    # Status item manager, coordinate anchoring & outside-click dismiss
+├── MenuBarPanel.swift         # Borderless NSPanel configured with .canJoinAllSpaces & .floating
+└── ContentView.swift          # Custom SwiftUI interface
+```
+
+---
+
+## Build & Run
+
+```bash
 git clone https://github.com/nilkanthdesai76/menubar-swiftui-template.git
 cd menubar-swiftui-template
-
-# Build and run
 swift run
 ```
 
